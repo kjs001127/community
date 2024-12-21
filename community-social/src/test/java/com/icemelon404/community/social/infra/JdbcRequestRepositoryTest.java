@@ -1,7 +1,7 @@
 package com.icemelon404.community.social.infra;
 
 import com.icemelon404.community.commons.dto.AscPagedRequest;
-import com.icemelon404.community.social.domain.request.FollowRequest;
+import com.icemelon404.community.social.domain.followrequest.FollowRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.icemelon404.community.social.grpc.config;
 
 import com.icemelon404.community.social.domain.follow.core.FollowService;
 import com.icemelon404.community.social.domain.follow.count.FollowCountService;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerFetchService;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerFetchService;
 import com.icemelon404.community.social.grpc.GrpcServerRunner;
 import com.icemelon404.community.social.grpc.api.FollowCheckApi;
 import com.icemelon404.community.social.grpc.api.FollowCountApi;

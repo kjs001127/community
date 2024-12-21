@@ -6,28 +6,26 @@ import com.icemelon404.community.commons.exception.DuplicateResourceException;
 import com.icemelon404.community.commons.exception.NoSuchResourceException;
 import com.icemelon404.community.social.domain.follow.entity.Follow;
 import com.icemelon404.community.social.domain.follow.core.FollowStore;
-import com.icemelon404.community.social.domain.follow.info.FollowReader;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerReader;
+import com.icemelon404.community.social.domain.follow.fetch.FollowReader;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerReader;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @RequiredArgsConstructor
 public class JdbcFollowRepository implements FollowReader, FollowStore, PagedFollowerReader {
 
     private final JdbcTemplate template;
-    private final int RANDOM_BOUND = 100;
-    private final Pager pager = new Pager();
 
     @Override
     public void add(Follow follow) {
         try {
             template.update("INSERT INTO follow (follower, followee, random) VALUES (?,?, ?)",
-                    follow.getFollower(), follow.getFollowee(), ThreadLocalRandom.current().nextInt(RANDOM_BOUND));
+                    follow.getFollower(), follow.getFollowee(), follow.hashCode());
         } catch (DuplicateKeyException e) {
             throw new DuplicateResourceException(follow.getFollower() + "->" + follow.getFollowee() + " 는 팔로우 상태입니다");
         }
@@ -61,9 +59,20 @@ public class JdbcFollowRepository implements FollowReader, FollowStore, PagedFol
 
     @Override
     public List<Follow> getFollowers(long followee, ConcretePagedRequest request) {
-        Boundary boundary = pager.getPage(request, RANDOM_BOUND);
+        Boundary boundary = getPage(request);
         return template.query("SELECT * FROM follow WHERE followee= ? AND random >= ? AND random < ?",
                 (row, rowNum) -> new Follow(row.getLong("follower"), row.getLong("followee")),
-                followee, boundary.getLow(), boundary.getHigh());
+                followee, boundary.low(), boundary.high());
+    }
+
+    private record Boundary(int low, int high){}
+
+    private Boundary getPage(ConcretePagedRequest request) {
+        int low = Integer.MAX_VALUE / request.getTotalPage() * request.getRequestPage();
+        int maxPageIdx = request.getTotalPage() - 1;
+        if (request.getRequestPage() == maxPageIdx)
+            return new Boundary(low, Integer.MAX_VALUE);
+        int high = Integer.MAX_VALUE / request.getTotalPage() * (request.getRequestPage() + 1);
+        return new Boundary(low, high);
     }
 }

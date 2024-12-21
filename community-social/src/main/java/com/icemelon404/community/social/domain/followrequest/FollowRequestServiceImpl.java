@@ -1,9 +1,10 @@
-package com.icemelon404.community.social.domain.request;
+package com.icemelon404.community.social.domain.followrequest;
 
 import com.icemelon404.community.social.domain.follow.core.FollowService;
 import com.icemelon404.community.social.domain.dto.FollowCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class FollowRequestServiceImpl implements FollowRequestService {
     }
 
     @Override
+    @Transactional
     public void accept(FollowCommand relation) {
         FollowRequest request = followRequest(relation);
         requestRepository.remove(request);

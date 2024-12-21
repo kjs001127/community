@@ -4,15 +4,18 @@ import com.icemelon404.community.social.domain.dto.FollowCommand;
 import com.icemelon404.community.social.domain.follow.entity.Follow;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Slf4j
 public class FollowServiceImpl implements FollowService {
 
     private final FollowStore store;
-    private final FollowEventPushHandler handler;
+    private final FollowEventListener handler;
+
 
     @Override
+    @Transactional
     public void addFollow(FollowCommand command) {
         Follow follow = followOf(command);
         store.add(follow);
@@ -21,6 +24,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
+    @Transactional
     public void removeFollow(FollowCommand command) {
         Follow follow = followOf(command);
         store.remove(follow);

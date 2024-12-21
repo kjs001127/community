@@ -1,7 +1,7 @@
 package com.icemelon404.community.social.api;
 
 import com.icemelon404.community.commons.dto.AscPagedRequest;
-import com.icemelon404.community.social.domain.request.FollowRequestFetchService;
+import com.icemelon404.community.social.domain.followrequest.FollowRequestFetchService;
 import com.icemelon404.community.social.domain.dto.FollowRequestInfo;
 import com.icemelon404.community.user.UserInfo;
 import com.icemelon404.community.user.auth.RequireAuth;

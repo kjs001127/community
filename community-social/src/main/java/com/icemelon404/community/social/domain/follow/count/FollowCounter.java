@@ -1,13 +1,13 @@
 package com.icemelon404.community.social.domain.follow.count;
 
 import com.icemelon404.community.social.domain.dto.FollowCommand;
-import com.icemelon404.community.social.domain.follow.core.FollowEventPushHandler;
+import com.icemelon404.community.social.domain.follow.core.FollowEventListener;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class FollowCountModifyHandler implements FollowEventPushHandler {
+public class FollowCounter implements FollowEventListener {
 
-    private final FollowCountModifier modifier;
+    private final FollowCountStore modifier;
 
     @Override
     public void onFollow(FollowCommand command) {

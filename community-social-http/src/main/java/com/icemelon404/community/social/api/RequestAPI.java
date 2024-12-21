@@ -1,6 +1,6 @@
 package com.icemelon404.community.social.api;
 
-import com.icemelon404.community.social.domain.request.FollowRequestService;
+import com.icemelon404.community.social.domain.followrequest.FollowRequestService;
 import com.icemelon404.community.social.domain.dto.FollowCommand;
 import com.icemelon404.community.user.UserInfo;
 import com.icemelon404.community.user.auth.RequireAuth;

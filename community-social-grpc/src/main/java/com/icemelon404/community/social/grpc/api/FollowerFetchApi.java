@@ -1,7 +1,7 @@
 package com.icemelon404.community.social.grpc.api;
 
 import com.icemelon404.community.commons.dto.ConcretePagedRequest;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerFetchService;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerFetchService;
 import com.icemelon404.community.social.proto.Follower;
 import com.icemelon404.community.social.proto.FollowerFetchServiceGrpc;
 import com.icemelon404.community.social.proto.FollowerRequest;

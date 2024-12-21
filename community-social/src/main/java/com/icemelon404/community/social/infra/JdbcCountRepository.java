@@ -1,14 +1,13 @@
 package com.icemelon404.community.social.infra;
 
 import com.icemelon404.community.social.domain.dto.FollowCount;
-import com.icemelon404.community.social.domain.follow.count.FollowCountModifier;
-import com.icemelon404.community.social.domain.follow.count.FollowCountReader;
+import com.icemelon404.community.social.domain.follow.count.FollowCountStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @RequiredArgsConstructor
-public class JdbcCountRepository implements FollowCountModifier, FollowCountReader {
+public class JdbcCountRepository implements FollowCountStore {
 
     private final JdbcTemplate template;
 

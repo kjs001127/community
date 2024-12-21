@@ -1,4 +1,4 @@
-package com.icemelon404.community.social.domain.follow.paged;
+package com.icemelon404.community.social.domain.follow.pagedfetch;
 
 import com.icemelon404.community.commons.dto.ConcretePagedRequest;
 

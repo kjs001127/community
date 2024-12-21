@@ -1,4 +1,4 @@
-package com.icemelon404.community.social.domain.request;
+package com.icemelon404.community.social.domain.followrequest;
 
 import com.icemelon404.community.commons.dto.AscPagedRequest;
 import com.icemelon404.community.social.domain.dto.FollowRequestInfo;

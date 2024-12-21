@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FollowCountServiceImpl implements FollowCountService {
 
-    private final FollowCountReader followCountStore;
+    private final FollowCountStore followCountStore;
 
     @Override
     public FollowCount getCount(long owner) {

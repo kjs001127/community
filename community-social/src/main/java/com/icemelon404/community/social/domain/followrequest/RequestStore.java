@@ -1,4 +1,4 @@
-package com.icemelon404.community.social.domain.request;
+package com.icemelon404.community.social.domain.followrequest;
 
 public interface RequestStore {
     void save(FollowRequest relation);

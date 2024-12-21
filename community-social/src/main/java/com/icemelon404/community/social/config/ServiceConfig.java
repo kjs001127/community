@@ -1,18 +1,18 @@
 package com.icemelon404.community.social.config;
 
 
-import com.icemelon404.community.social.domain.follow.core.FollowEventPushHandler;
+import com.icemelon404.community.social.domain.follow.core.FollowEventListener;
 import com.icemelon404.community.social.domain.follow.core.FollowService;
 import com.icemelon404.community.social.domain.follow.core.FollowServiceImpl;
 import com.icemelon404.community.social.domain.follow.core.FollowStore;
 import com.icemelon404.community.social.domain.follow.count.*;
-import com.icemelon404.community.social.domain.follow.info.FollowInfoFetchService;
-import com.icemelon404.community.social.domain.follow.info.FollowInfoFetchServiceImpl;
-import com.icemelon404.community.social.domain.follow.info.FollowReader;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerFetchService;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerFetchServiceImpl;
-import com.icemelon404.community.social.domain.follow.paged.PagedFollowerReader;
-import com.icemelon404.community.social.domain.request.*;
+import com.icemelon404.community.social.domain.follow.fetch.FollowInfoFetchService;
+import com.icemelon404.community.social.domain.follow.fetch.FollowInfoFetchServiceImpl;
+import com.icemelon404.community.social.domain.follow.fetch.FollowReader;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerFetchService;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerFetchServiceImpl;
+import com.icemelon404.community.social.domain.follow.pagedfetch.PagedFollowerReader;
+import com.icemelon404.community.social.domain.followrequest.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
     @Bean
-    public FollowCountService countService(FollowCountReader reader) {
+    public FollowCountService countService(FollowCountStore reader) {
         return new FollowCountServiceImpl(reader);
     }
 
@@ -30,7 +30,7 @@ public class ServiceConfig {
     }
 
     @Bean
-    public FollowService followService(FollowStore store, FollowEventPushHandler handler) {
+    public FollowService followService(FollowStore store, FollowEventListener handler) {
         return new FollowServiceImpl(store, handler);
     }
 
@@ -50,7 +50,7 @@ public class ServiceConfig {
     }
 
     @Bean
-    public FollowEventPushHandler countPushHandler(FollowCountModifier modifier) {
-        return new FollowCountModifyHandler(modifier);
+    public FollowEventListener countPushHandler(FollowCountStore modifier) {
+        return new FollowCounter(modifier);
     }
 }
